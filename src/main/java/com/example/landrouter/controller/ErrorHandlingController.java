@@ -15,6 +15,6 @@ public class ErrorHandlingController extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = {RouteNotFoundException.class, UnknownLandException.class})
     public ResponseEntity<Object> routeNotFound(RuntimeException e) {
         log.error(e.getMessage(), e);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest().build();
     }
 }
