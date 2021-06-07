@@ -2,8 +2,17 @@
 Spring Boot application that is able to calculate any possible land route from one country to another
 
 ## Build and run
+Build fat jar and run it:
 ```bash
-./mvnw spring-boot:run
+./mvnw package
+java -jar target/land-router.jar
+```
+
+Or build docker image and start container:
+```bash
+./mvnw package
+docker build -t land-router .
+docker run -p 8080:8080 --rm land-router
 ```
 
 ## Example of usage
