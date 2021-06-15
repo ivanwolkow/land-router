@@ -6,9 +6,10 @@ import java.util.Set;
 
 class CustomNode<T> implements Comparable<CustomNode<T>> {
     T val;
-    int pathLength = Integer.MAX_VALUE;
-    CustomNode<T> prevNode = null;
     Set<CustomNode<T>> neighbours = new HashSet<>();
+
+    ThreadLocal<Integer> pathLength = ThreadLocal.withInitial(() -> Integer.MAX_VALUE);
+    ThreadLocal<CustomNode<T>> prevNode = ThreadLocal.withInitial(() -> null);
 
     public CustomNode(T val) {
         this.val = val;
@@ -31,14 +32,14 @@ class CustomNode<T> implements Comparable<CustomNode<T>> {
     public String toString() {
         return "CustomNode{" +
                 "val=" + val +
-                ", pathLength=" + pathLength +
-                ", prevNode=" + prevNode +
+                ", pathLength=" + pathLength.get() +
+                ", prevNode=" + prevNode.get() +
                 ", neighbours cnt=" + neighbours.size() +
                 '}';
     }
 
     @Override
     public int compareTo(CustomNode<T> o) {
-        return Integer.compare(this.pathLength, o.pathLength);
+        return Integer.compare(this.pathLength.get(), o.pathLength.get());
     }
 }

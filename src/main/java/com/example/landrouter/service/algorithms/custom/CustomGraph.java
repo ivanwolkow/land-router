@@ -35,8 +35,8 @@ public class CustomGraph<T> {
 
     public void resetNodes() {
         nodes.forEach((val, node) -> {
-            node.prevNode = null;
-            node.pathLength = Integer.MAX_VALUE;
+            node.prevNode.set(null);
+            node.pathLength.set(Integer.MAX_VALUE);
         });
     }
 
